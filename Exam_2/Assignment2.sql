@@ -60,7 +60,7 @@ GROUP BY T3.CategoryName, T2.CategoryId
     INNER JOIN [dbo].[Order] T3 ON T3.OrderId = T2.OrderId
     GROUP BY YEAR(T3.OrderDate), MONTH(T3.OrderDate), T1.ProductName, DATENAME(MONTH, T3.OrderDate)
 ), CTE2 AS (
-    SELECT RANK() OVER (PARTITION BY TotalQuantity ORDER BY TotalQuantity) AS RankId, *
+    SELECT RANK() OVER (PARTITION BY OrderYear, MonthOrder, TotalQuantity ORDER BY TotalQuantity) AS RankId, *
     FROM CTE 
 )
 
